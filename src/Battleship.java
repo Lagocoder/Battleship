@@ -1,6 +1,7 @@
 public class Battleship {
     private String shipName;
     private int hp;
+
     void setShipName(String newShipName){
         this.shipName = newShipName;
     }
@@ -16,5 +17,9 @@ public class Battleship {
     }
     String getShipName(){
         return  this.shipName;
+    }
+    public Battleship(String shipName, int hp) throws Exception {
+            setShipName(shipName);
+            setHp(hp);
     }
 }
