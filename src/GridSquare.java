@@ -22,6 +22,9 @@ public class GridSquare {
     char getNumber(){
         return this.number;
     }
+    Battleship getShip(){
+        return this.ship;
+    }
     void log(){
         System.out.print(this.letter);
         System.out.print(this.number);

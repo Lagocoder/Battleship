@@ -1,3 +1,4 @@
+import java.lang.invoke.SwitchPoint;
 import java.util.ArrayList;
 import java.util.Random;
 public class Grid {
@@ -23,6 +24,53 @@ public class Grid {
             for (int j = 0; j < this.size; j++) {
                 gridLines[i][j] = "O";
             }
+        }
+        for (int k = 0; k < shipSquares.size(); k++) {
+            if(shipSquares.get(k).isHit() == true){
+                int letterNumber = 0;
+                char letter;
+                int number = Character.getNumericValue(shipSquares.get(k).getNumber())-1;
+                letter = shipSquares.get(k).getLetter();
+                System.out.println(letter);
+                switch (Character.toString(letter)){
+                    case "A":
+                        letterNumber = 0;
+                        break;
+                    case "B":
+                        letterNumber = 1;
+                        break;
+                    case "C":
+                        letterNumber = 2;
+                        break;
+                    case "D":
+                        letterNumber = 3;
+                        break;
+                    case "E":
+                        letterNumber = 4;
+                        break;
+                    case "F":
+                        letterNumber = 5;
+                        break;
+                    case "G":
+                        letterNumber = 6;
+                        break;
+                    case "H":
+                        letterNumber = 7;
+                        break;
+                    case "I":
+                        letterNumber = 8;
+                        break;
+                    default: letterNumber = 0;
+                }
+                System.out.println(letterNumber);
+                System.out.println(number);
+
+
+                gridLines[letterNumber][number] = String.valueOf(shipSquares.get(k).getShip().getHp());
+            }else{
+                continue;
+            }
+
         }
         for (int i = 0; i < this.size; i++) {
             String row = "";
