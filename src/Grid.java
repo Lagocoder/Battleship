@@ -6,8 +6,8 @@ public class Grid {
     private String abcs = "ABCDEFGHI";
     private String nums = "123456789";
     private int size;
-    ArrayList<String> missedSquares = new ArrayList<String>();
-    ArrayList<GridSquare> shipSquares = new ArrayList<GridSquare>();
+    private ArrayList<String> missedSquares = new ArrayList<String>();
+    private ArrayList<GridSquare> shipSquares = new ArrayList<GridSquare>();
     public Grid(String[] shipNames) throws Exception {
         this.size = shipNames.length;
         for (int i = 0; i < shipNames.length; i++) {
@@ -17,6 +17,9 @@ public class Grid {
             GridSquare square = new GridSquare(letter, number, ship);
             shipSquares.add(square);
         }
+    }
+    void Target(char letter, char number){
+
     }
     void displayGrid(){
         String[][] gridLines = new String[this.size][this.size];
