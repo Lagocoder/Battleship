@@ -19,7 +19,7 @@ public class Grid {
         }
     }
     void Target(char letter, char number){
-
+      System.out.println(letter);
     }
     void displayGrid(){
         String[][] gridLines = new String[this.size][this.size];

@@ -18,7 +18,7 @@ public class Game {
         //System.out.println(InetAddress.getLocalHost().getHostName());
        //Player player = new Player();
         Grid test = new Grid(shipNames);
-
+        test.Target('a', '1');
        //final BattleshipGame game = new BattleshipGame(player);
     }
 }
