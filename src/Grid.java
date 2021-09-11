@@ -6,8 +6,8 @@ public class Grid {
     private String abcs = "ABCDEFGHI";
     private String nums = "123456789";
     private int size;
-    private ArrayList<String> missedSquares = new ArrayList<String>();
-    private ArrayList<GridSquare> shipSquares = new ArrayList<GridSquare>();
+    public ArrayList<String> missedSquares = new ArrayList<String>();
+    public ArrayList<GridSquare> shipSquares = new ArrayList<GridSquare>();
     public Grid(String[] shipNames) throws Exception {
         this.size = shipNames.length;
         for (int i = 0; i < shipNames.length; i++) {
@@ -18,15 +18,49 @@ public class Grid {
             shipSquares.add(square);
         }
     }
-    void Target(char letter, char number){
-      System.out.println(letter);
-    }
     void displayGrid(){
         String[][] gridLines = new String[this.size][this.size];
         for (int i = 0; i < this.size; i++) {
             for (int j = 0; j < this.size; j++) {
                 gridLines[i][j] = "O";
             }
+        }
+        for (int i = 0; i < missedSquares.size(); i++) {
+            int number = Character.getNumericValue(missedSquares.get(i).charAt(1))-1;
+            char letter = missedSquares.get(i).charAt(0);
+            int letterNumber;
+            switch (Character.toString(letter)){
+                case "A":
+                    letterNumber = 0;
+                    break;
+                case "B":
+                    letterNumber = 1;
+                    break;
+                case "C":
+                    letterNumber = 2;
+                    break;
+                case "D":
+                    letterNumber = 3;
+                    break;
+                case "E":
+                    letterNumber = 4;
+                    break;
+                case "F":
+                    letterNumber = 5;
+                    break;
+                case "G":
+                    letterNumber = 6;
+                    break;
+                case "H":
+                    letterNumber = 7;
+                    break;
+                case "I":
+                    letterNumber = 8;
+                    break;
+                default: letterNumber = 0;
+            }
+
+            gridLines[letterNumber][number] = "M";
         }
         for (int k = 0; k < shipSquares.size(); k++) {
             if(shipSquares.get(k).isHit() == true){
@@ -84,4 +118,7 @@ public class Grid {
         }
     }
 
+    public int getSize() {
+        return size;
+    }
 }
