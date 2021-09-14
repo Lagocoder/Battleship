@@ -16,7 +16,11 @@ public class Grid {
             Battleship ship = new Battleship(shipNames[i], random.nextInt(shipNames.length)+1);
             GridSquare square = new GridSquare(letter, number, ship);
             shipSquares.add(square);
+            System.out.print(letter);
+            System.out.print(number);
+
         }
+        shipSquares.get(0).setHit(true);
     }
     void displayGrid(){
         String[][] gridLines = new String[this.size][this.size];
@@ -64,6 +68,7 @@ public class Grid {
         }
         for (int k = 0; k < shipSquares.size(); k++) {
             if(shipSquares.get(k).isHit() == true){
+
                 int letterNumber = 0;
                 char letter;
                 int number = Character.getNumericValue(shipSquares.get(k).getNumber())-1;
@@ -102,8 +107,11 @@ public class Grid {
                 System.out.println(letterNumber);
                 System.out.println(number);
 
-
-                gridLines[letterNumber][number] = String.valueOf(shipSquares.get(k).getShip().getHp());
+                if(shipSquares.get(k).isDestroyed() == true){
+                    gridLines[letterNumber][number] = "D";
+                }else {
+                    gridLines[letterNumber][number] = String.valueOf(shipSquares.get(k).getShip().getHp());
+                }
             }else{
                 continue;
             }

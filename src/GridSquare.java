@@ -2,12 +2,22 @@ public class GridSquare {
     private char letter;
     private char number;
     private boolean hit = false;
+    private boolean destroyed = false;
     private Battleship ship;
     public GridSquare(char letter, char number, Battleship ship){
         this.letter = letter;
         this.number = number;
         this.ship = ship;
     }
+
+    public boolean isDestroyed() {
+        return destroyed;
+    }
+
+    public void setDestroyed(boolean destroyed) {
+        this.destroyed = destroyed;
+    }
+
     char getLetter(){
         return this.letter;
     }

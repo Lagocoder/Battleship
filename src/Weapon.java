@@ -7,7 +7,9 @@ public class Weapon {
         this.weaponStorage = storage;
         this.weaponName = name;
     }
-
+    public void removeWeapon(){
+        this.weaponStorage = this.weaponStorage - 1;
+    }
     public int getWeaponDamage() {
         return weaponDamage;
     }
