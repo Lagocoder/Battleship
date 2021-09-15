@@ -19,6 +19,7 @@ public class Targeter {
                         grid.shipSquares.get(i).getShip().setHp(newHP);
                         break;
                     }else{
+                        grid.shipSquares.get(i).setHit(false);
                         grid.shipSquares.get(i).setDestroyed(true);
                     }
                 }
@@ -76,6 +77,7 @@ public class Targeter {
             }else{
                 boolean hasShip = false;
                 boolean isHit = false;
+                boolean destroyed = false;
                 for (int i = 0; i < grid.shipSquares.size(); i++) {
                     if(grid.shipSquares.get(i).getLetter() == letter && grid.shipSquares.get(i).getNumber() == number){
                         if(grid.shipSquares.get(i).isHit() == true){
@@ -83,7 +85,10 @@ public class Targeter {
                             isHit = true;
                             this.ship = grid.shipSquares.get(i).getShip();
                             break;
-                        }else{
+                        }else if(grid.shipSquares.get(i).isDestroyed() == true){
+                            return new TargetRes();
+                        }
+                        else{
                             hasShip = true;
                             break;
                         }

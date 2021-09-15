@@ -20,7 +20,7 @@ public class Grid {
             System.out.print(number);
 
         }
-        shipSquares.get(0).setHit(true);
+        shipSquares.get(0).setDestroyed(true);
     }
     void displayGrid(){
         String[][] gridLines = new String[this.size][this.size];
@@ -104,8 +104,8 @@ public class Grid {
                         break;
                     default: letterNumber = 0;
                 }
-                System.out.println(letterNumber);
-                System.out.println(number);
+                //System.out.println(letterNumber);
+                //System.out.println(number);
 
                 if(shipSquares.get(k).isDestroyed() == true){
                     gridLines[letterNumber][number] = "D";
