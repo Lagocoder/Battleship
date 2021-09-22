@@ -16,6 +16,35 @@ public class BattleshipGame {
         return in.nextInt();
     }
     private void BattleshipLoop() throws Exception {
+        int mainShipsLeft = 0;
+        for (int i = 0; i < grid.shipSquares.size(); i++) {
+            if (grid.shipSquares.get(i).isDestroyed() == false) {
+                mainShipsLeft = mainShipsLeft + 1;
+            } else {
+                continue;
+            }
+        }
+        if (mainShipsLeft == 0) {
+            System.out.println("------------------------------------------------");
+            System.out.println("You have won! \nDo you want to play again? Y/N");
+            String tof = in.nextLine();
+            if(tof == "Y"){
+
+            }else{
+                System.out.println("Bye!");
+            }
+
+
+        }else if(this.player.weapons.size() == 0){
+            System.out.println("------------------------------------------------");
+            System.out.println("You have lost! You ran out of weapons. \nDo you want to play again? Y/N");
+            String tof = in.nextLine();
+            if(tof == "Y"){
+
+            }else{
+                System.out.println("Bye!");
+            }
+        }else{
         Targeter targeter = new Targeter(this.grid);
         System.out.println("------------------------------------------------");
         grid.displayGrid();
@@ -26,9 +55,9 @@ public class BattleshipGame {
         }
         int shipsLeft = 0;
         for (int i = 0; i < grid.shipSquares.size(); i++) {
-            if(grid.shipSquares.get(i).isDestroyed() == false){
+            if (grid.shipSquares.get(i).isDestroyed() == false) {
                 shipsLeft = shipsLeft + 1;
-            }else{
+            } else {
                 continue;
             }
         }
@@ -36,19 +65,44 @@ public class BattleshipGame {
         System.out.println("------------------------------------------------");
         System.out.println("Please choose coordinates:");
         String coords = in.nextLine();
-        TargetRes tr = targeter.Target(coords.charAt(0), coords.charAt(1));
-        if(tr.res == true){
+        //System.out.println(coords.getClass());
+        //System.out.println(coords.getBytes());
+        TargetRes tr = new TargetRes();
+
+        try {
+            tr = targeter.Target(coords.charAt(0), coords.charAt(1));
+        } catch (Exception ex) {
+            coords = in.nextLine();
+            tr = targeter.Target(coords.charAt(0), coords.charAt(1));
+
+        }
+        if (tr.res == true) {
             System.out.println("------------------------------------------------");
-            if(tr.isHit == true){
+            int weaponInt;
+            if (tr.isHit == true) {
                 System.out.println(String.format("You have already hit the ship, %1$s. It is not destroyed so you can still hit it. It has %2$s HP left.", tr.shipName, tr.hp));
                 System.out.println("------------------------------------------------");
-                int weaponInt;
-                weaponInt = getWeapon();
+
+            } else {
+                System.out.println("You may fire on that square");
+                System.out.println("------------------------------------------------");
+
             }
-        }else{
+            weaponInt = getWeapon();
+            targeter.Fire(this.player.weapons.get(weaponInt));
+
+            if (this.player.weapons.get(weaponInt).getWeaponStorage() > 0) {
+                this.player.weapons.get(weaponInt).removeWeapon();
+            }
+            if (this.player.weapons.get(weaponInt).getWeaponStorage() == 0) {
+                this.player.weapons.remove(weaponInt);
+            }
+        } else {
             System.out.println("------------------------------------------------");
             System.out.println("Unable to fire on ship because, A: You have already missed this square, B: Ship is destroyed, or C: Selection is out of bounds. ");
         }
+        BattleshipLoop();
+    }
     }
     public BattleshipGame(Player player) throws Exception {
         this.player = player;

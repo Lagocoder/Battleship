@@ -20,7 +20,8 @@ public class Grid {
             System.out.print(number);
 
         }
-        shipSquares.get(0).setDestroyed(true);
+        shipSquares.get(0).setHit(true);
+
     }
     void displayGrid(){
         String[][] gridLines = new String[this.size][this.size];
@@ -73,7 +74,7 @@ public class Grid {
                 char letter;
                 int number = Character.getNumericValue(shipSquares.get(k).getNumber())-1;
                 letter = shipSquares.get(k).getLetter();
-                System.out.println(letter);
+                //System.out.println(letter);
                 switch (Character.toString(letter)){
                     case "A":
                         letterNumber = 0;
@@ -107,11 +108,45 @@ public class Grid {
                 //System.out.println(letterNumber);
                 //System.out.println(number);
 
-                if(shipSquares.get(k).isDestroyed() == true){
-                    gridLines[letterNumber][number] = "D";
-                }else {
                     gridLines[letterNumber][number] = String.valueOf(shipSquares.get(k).getShip().getHp());
+
+            }else if(shipSquares.get(k).isDestroyed() == true){
+                int letterNumber = 0;
+                char letter;
+                int number = Character.getNumericValue(shipSquares.get(k).getNumber())-1;
+                letter = shipSquares.get(k).getLetter();
+                //System.out.println(letter);
+                switch (Character.toString(letter)){
+                    case "A":
+                        letterNumber = 0;
+                        break;
+                    case "B":
+                        letterNumber = 1;
+                        break;
+                    case "C":
+                        letterNumber = 2;
+                        break;
+                    case "D":
+                        letterNumber = 3;
+                        break;
+                    case "E":
+                        letterNumber = 4;
+                        break;
+                    case "F":
+                        letterNumber = 5;
+                        break;
+                    case "G":
+                        letterNumber = 6;
+                        break;
+                    case "H":
+                        letterNumber = 7;
+                        break;
+                    case "I":
+                        letterNumber = 8;
+                        break;
+                    default: letterNumber = 0;
                 }
+                gridLines[letterNumber][number] = "D";
             }else{
                 continue;
             }
